@@ -470,9 +470,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     function sendXAPIStatement(testName) {
         var lrs = new TinCan.LRS({
-            endpoint: "https://cloud.scorm.com/lrs/your-endpoint-here",  // Replace with your LRS endpoint from SCORM Cloud
-            username: "z4akOlB6Ril9oTRKgh0",  // Your LRS Key (username)
-            password: "Ahi5H6eF50zDT7h3w",  // Your LRS Secret (password)
+            endpoint: "https://cloud.scorm.com/lrs/ENC1S1WW41",  // Replace with your SCORM Cloud LRS endpoint
+            username: "z4akOlB6Ril9oTRKgh0",  // Your LRS Key (from your earlier screenshot)
+            password: "Ahi5H6eF50zDT7h3w",  // Your LRS Secret (from your earlier screenshot)
             version: "1.0.3"
         });
 
@@ -487,9 +487,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 display: { "en-US": "completed" }
             },
             object: {
-                id: `http://yourproject.com/tests/${testName}`,  // Pass which test was completed
+                id: `http://yourproject.com/tests/${testName}`,  // Replace with the test URL
                 definition: {
-                    name: { "en-US": `${testName}` },
+                    name: { "en-US": `${testName}` },  // Replace with the test name
                     description: { "en-US": `Completed the ${testName} test` }
                 },
                 objectType: "Activity"
