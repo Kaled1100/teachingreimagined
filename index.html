@@ -467,48 +467,50 @@
   <script src="https://cdn.jsdelivr.net/npm/tincanjs@0.48.0/build/tincan-min.js"></script>
 
 <script>
-function sendXAPIStatement(testName) {
-    var lrs = new TinCan.LRS({
-        endpoint: "https://cloud.scorm.com/lrs/your-endpoint-here",  // Replace with your LRS endpoint from SCORM Cloud
-        username: "z4akOlB6Ril9oTRKgh0",  // Your LRS Key (username)
-        password: "Ahi5H6eF50zDT7h3w",  // Your LRS Secret (password)
-        version: "1.0.3"
-    });
+document.addEventListener('DOMContentLoaded', function() {
+    function sendXAPIStatement(testName) {
+        var lrs = new TinCan.LRS({
+            endpoint: "https://cloud.scorm.com/lrs/your-endpoint-here",  // Replace with your LRS endpoint from SCORM Cloud
+            username: "z4akOlB6Ril9oTRKgh0",  // Your LRS Key (username)
+            password: "Ahi5H6eF50zDT7h3w",  // Your LRS Secret (password)
+            version: "1.0.3"
+        });
 
-    var statement = {
-        actor: {
-            mbox: "mailto:user@example.com",  // Replace with the actual user's email
-            name: "User Name",  // Replace with the actual user's name
-            objectType: "Agent"
-        },
-        verb: {
-            id: "http://adlnet.gov/expapi/verbs/completed",
-            display: { "en-US": "completed" }
-        },
-        object: {
-            id: `http://yourproject.com/tests/${testName}`,  // Pass which test was completed
-            definition: {
-                name: { "en-US": `${testName}` },
-                description: { "en-US": `Completed the ${testName} test` }
+        var statement = {
+            actor: {
+                mbox: "mailto:user@example.com",  // Replace with the actual user's email
+                name: "User Name",  // Replace with the actual user's name
+                objectType: "Agent"
             },
-            objectType: "Activity"
-        }
-    };
-
-    // Send the xAPI statement to the LRS
-    lrs.saveStatement(statement, {
-        callback: function(err, xhr) {
-            if (err) {
-                console.error("Failed to send statement:", err);
-                return;
+            verb: {
+                id: "http://adlnet.gov/expapi/verbs/completed",
+                display: { "en-US": "completed" }
+            },
+            object: {
+                id: `http://yourproject.com/tests/${testName}`,  // Pass which test was completed
+                definition: {
+                    name: { "en-US": `${testName}` },
+                    description: { "en-US": `Completed the ${testName} test` }
+                },
+                objectType: "Activity"
             }
-            console.log("xAPI statement sent!", xhr);
-        }
-    });
-}
+        };
 
-// Example: Call this function after a test is completed
-sendXAPIStatement('Entry Test');  // Replace 'Entry Test' with the specific test name
+        // Send the xAPI statement to the LRS
+        lrs.saveStatement(statement, {
+            callback: function(err, xhr) {
+                if (err) {
+                    console.error("Failed to send statement:", err);
+                    return;
+                }
+                console.log("xAPI statement sent!", xhr);
+            }
+        });
+    }
+
+    // Example: Call this function after a test is completed
+    sendXAPIStatement('Entry Test');  // Replace 'Entry Test' with the specific test name
+});
 </script>
 </body>
 <script src="html5/lib/scripts/bootstrapper.min.js"></script>
